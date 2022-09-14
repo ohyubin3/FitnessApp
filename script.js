@@ -10,26 +10,7 @@ fetch(`https://edamam-recipe-search.p.rapidapi.com/search?q=${variable}`,getNutr
   .then((response) => response.json())
   .then((response) => console.log(response))
   .catch((err) => console.error(err));
-//
-
-// const fitnessApiOptions = {
-//   method: "GET",
-//   headers: {
-//     "X-Api-Key": "mGkW2J+0c+P7ljsb1CSQYA==wChuA7q7x0pbOnBZ",
-//     // "X-RapidAPI-Host": "calories-burned-by-api-ninjas.p.rapidapi.com",
-//   },
-//   contentType: "application/json"
-// };
-
-// fetch(
-//   "https://calories-burned-by-api-ninjas.p.rapidapi.com/v1/caloriesburned?activity=skiing",
-//   fitnessApiOptions
-// )
-//   .then((response) => response.json())
-//   .then((response) => console.log(response))
-//   .catch((err) => console.error(err));
-// //
-
+  
 const fitnessOptions = {
 	method: 'GET',
 	headers: {
