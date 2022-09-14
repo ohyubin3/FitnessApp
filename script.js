@@ -5,12 +5,13 @@ const getNutritionAPI = {
     "X-RapidAPI-Host": "edamam-recipe-search.p.rapidapi.com",
   },
 };
-let variable = "Tuna"
-fetch(`https://edamam-recipe-search.p.rapidapi.com/search?q=${variable}`,getNutritionAPI)
+
+fetch("https://edamam-recipe-search.p.rapidapi.com/search?q=chicken", getNutritionAPI)
   .then((response) => response.json())
   .then((response) => console.log(response))
   .catch((err) => console.error(err));
-  
+//
+
 const fitnessOptions = {
 	method: 'GET',
 	headers: {
