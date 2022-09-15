@@ -1,7 +1,7 @@
 // Nutrtion Section
 var recipeList = document.querySelector('ul');
 let proteinContainer = document.querySelector(".dropdown-menu")
-
+console.log(recipeList)
 
 const nutritionAPI = {
   method: "GET",
@@ -22,17 +22,33 @@ function getApi(event) {
         return response.json();
       })
       .then(function (data) {
-        console.log(data)
-        for (var i = 0; i < data.length; i++) {
+        // console.log(data)
+        // console.log("hello")
+        // console.log(typeof data)
+        let recipes = data.hits
+
+        for (var i = 0; i < recipes.length; i++) {
+          // console.log("hello", i)
           var listItem = document.createElement('li');
-          listItem.textContent = data[i].recipes.label;
-          recipeList.appendChild(listItem);
+          // console.log(listItem)
+
+          // path for looping over lables
+          // console.log(recipes[i].recipe.label)
+  // consider doing innerhtml if you want links 
+          listItem.dataset.cal = Math.floor(parseInt(recipes[i].recipe.calories))
+
+          listItem.innerHTML = `<a href=${recipes[i].recipe.url}>${recipes[i].recipe.label}</a>`
+          console.log(listItem)
+
+           recipeList.appendChild(listItem);
+           console.log(recipeList)
         }
       });
   }
 }
 
-
+//
+//listItem.innerHTML = `<a href=${recipes[i].recipe.url}>${recipes[i].recipe.label}</a>`
 
 
 
