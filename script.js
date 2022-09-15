@@ -35,6 +35,7 @@ function getApi(event) {
           // path for looping over lables
           // console.log(recipes[i].recipe.label)
   // consider doing innerhtml if you want links 
+          listItem.dataset.cal = Math.floor(parseInt(recipes[i].recipe.calories))
 
           listItem.innerHTML = `<a href=${recipes[i].recipe.url}>${recipes[i].recipe.label}</a>`
           console.log(listItem)
