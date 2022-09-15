@@ -53,7 +53,7 @@ function getApi(event) {
       });
   }
 }
-
+// changes
 function displayDetail(event) {
   if (event.target.matches("li")) {
     // console.log(event.target.textContent)
