@@ -44,10 +44,12 @@ function getApi(event) {
           // console.log(listItem)
 
           recipeList.appendChild(listItem);
+          listItem.dataset.url = recipes[i].recipe.url
+          
 
-          listItem.dataset.url = recipes[i].recipe.url)
-          listItem.innerHTML = `${recipes[i].recipe.label}`
-          recipeList.appendChild(listItem);
+          // listItem.dataset.url = recipes[i].recipe.url);
+          // listItem.innerHTML = `${recipes[i].recipe.label}`
+          // recipeList.appendChild(listItem);
           //  console.log(recipeList)
         }
       });
@@ -58,10 +60,16 @@ function displayDetail(event) {
   if (event.target.matches("li")) {
     // console.log(event.target.textContent)
     // console.log(event.target.dataset.cal)
-    let labelEl = document.createElement("p")
-    labelEl.textContent = event.target.textContent
+    let labelEl = document.createElement("h3")
+    labelEl.innerHTML = `<a href=${event.target.dataset.url}>${event.target.textContent}</a>`
     infoCard.appendChild(labelEl)
-    
+
+    let calorieEl = document.createElement("p")
+    calorieEl.textContent = ("Calories: " + event.target.dataset.cal)
+    infoCard.appendChild(calorieEl)
+    // let linkEl = document.createElement("a")
+
+    // listItem.innerHTML = `<a href=${recipes[i].recipe.url}>${recipes[i].recipe.label}</a>`
   }
 }
 //listItem.innerHTML = `<a href=${recipes[i].recipe.url}>${recipes[i].recipe.label}</a>`
