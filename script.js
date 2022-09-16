@@ -1,4 +1,4 @@
-// Nutrtion Section
+// Nutritgition Section
 var recipeList = document.querySelector('ul');
 let proteinContainer = document.querySelector(".dropdown-menu")
 let recipeDetail = document.querySelector("li")
@@ -57,6 +57,7 @@ function displayDetail(event) {
     calorieEl.textContent = ("Calories: " + event.target.dataset.cal)
     infoCard.appendChild(calorieEl)
 
+ 
     let calorieBurn = document.createElement("h3")
     calorieBurn.textContent = ("Total calories consumed: " + event.target.dataset.cal)
     calorieCard.appendChild(calorieBurn)
@@ -82,8 +83,6 @@ function getFitnessAPI(event) {
 
 //-------------------------------Calories info above ---------------------------
 
-
-    var requestUrl
 
 proteinContainer.addEventListener('click', getApi)
 
