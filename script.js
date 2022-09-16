@@ -101,10 +101,9 @@ recipeList.addEventListener('click', function (event) {
 function showPrevChoice() {
     let lastSelect = JSON.parse(localStorage.getItem("savePrevChoice"));
     if (lastSelect !== null) {
-      document.querySelector(".show-prev-choice").textContent = lastSelect
-    
-}  
-
+      document.querySelector(".show-prev-choice").textContent = lastSelect     
+    }
+}
 
 
 //----------------------API below --------------------------------
@@ -124,4 +123,5 @@ fetch(
   .then((response) => response.json())
   .then((response) => console.log(response))
   .catch((err) => console.error(err));
+
 
