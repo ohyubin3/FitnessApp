@@ -67,19 +67,8 @@ function displayDetail(event) {
     let calorieEl = document.createElement("p")
     calorieEl.textContent = ("Calories: " + event.target.dataset.cal)
     infoCard.appendChild(calorieEl)
-    // let linkEl = document.createElement("a")
-
-    // listItem.innerHTML = `<a href=${recipes[i].recipe.url}>${recipes[i].recipe.label}</a>`
   }
 }
-//listItem.innerHTML = `<a href=${recipes[i].recipe.url}>${recipes[i].recipe.label}</a>`
-
-
-//seperate event listener for our ul
-// use event delegation to do event.target
-// create an element for that 3rd card
-// populate that element with the data from our data-attributes
-// and append it to that card
 proteinContainer.addEventListener('click', getApi)
 
 recipeList.addEventListener('click', displayDetail)
@@ -90,22 +79,21 @@ fetch(
 )
   .then((response) => response.json())
   .then((response) => console.log(response))
+  .catch((err) => console.error(err))
+  
+// Fitness Section
+const fitnessOptions = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": "5ef0a389f2msh11866c287896cb0p101bc7jsn1c10fa4b94f1",
+    "X-RapidAPI-Host": "calories-burned-by-api-ninjas.p.rapidapi.com",
+  },
+};
+
+fetch(
+  "https://calories-burned-by-api-ninjas.p.rapidapi.com/v1/caloriesburned?activity=skiing",
+  fitnessOptions
+)
+  .then((response) => response.json())
+  .then((response) => console.log(response))
   .catch((err) => console.error(err));
-//
-
-// // Fitness Section
-// const fitnessOptions = {
-//   method: "GET",
-//   headers: {
-//     "X-RapidAPI-Key": "5ef0a389f2msh11866c287896cb0p101bc7jsn1c10fa4b94f1",
-//     "X-RapidAPI-Host": "calories-burned-by-api-ninjas.p.rapidapi.com",
-//   },
-// };
-
-// fetch(
-//   "https://calories-burned-by-api-ninjas.p.rapidapi.com/v1/caloriesburned?activity=skiing",
-//   fitnessOptions
-// )
-//   .then((response) => response.json())
-//   .then((response) => console.log(response))
-//   .catch((err) => console.error(err));
