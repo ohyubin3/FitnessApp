@@ -44,7 +44,14 @@ function displayDetail(event) {
 
     let calorieEl = document.createElement("p")
     calorieEl.textContent = ("Calories: " + event.target.dataset.cal)
-    infoCard.appendChild(calorieEl)}}
+    infoCard.appendChild(calorieEl)
+   
+
+    let calorieBurn = document.createElement("h3")
+    calorieBurn.textContent = ("Total calories consumed: " + event.target.dataset.cal)
+    calorieCard.appendChild(calorieBurn)}}
+//-------------------------------Calories info above ---------------------------
+
 
 proteinContainer.addEventListener('click', getApi)
 
