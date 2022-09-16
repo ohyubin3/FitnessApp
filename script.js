@@ -86,9 +86,26 @@ function getFitnessAPI(event) {
 
 
 proteinContainer.addEventListener('click', getApi)
-
 recipeList.addEventListener('click', displayDetail)
 recipeList.addEventListener('click', getFitnessAPI)
+
+
+// local storage system //
+recipeList.addEventListener('click', function (event) {
+  if (event.target.matches("li")) {
+  
+      let prevChoice = event.target.textContent
+      localStorage.setItem("savePrevChoice", JSON.stringify(prevChoice));
+}});
+  
+function showPrevChoice() {
+    let lastSelect = JSON.parse(localStorage.getItem("savePrevChoice"));
+    if (lastSelect !== null) {
+      document.querySelector(".show-prev-choice").textContent = lastSelect
+    
+}  
+
+
 
 //----------------------API below --------------------------------
 fetch(
@@ -98,6 +115,8 @@ fetch(
   .then((response) => response.json())
   .then((response) => console.log(response))
   .catch((err) => console.error(err));
+
+
 fetch(
   "https://calories-burned-by-api-ninjas.p.rapidapi.com/v1/caloriesburned?activity=walking",
   fitnessOptions
@@ -105,3 +124,4 @@ fetch(
   .then((response) => response.json())
   .then((response) => console.log(response))
   .catch((err) => console.error(err));
+
