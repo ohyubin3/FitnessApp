@@ -1,9 +1,11 @@
-// Nutrtion Section
+// Nutrition Section
 var recipeList = document.querySelector('ul');
 let proteinContainer = document.querySelector(".dropdown-menu")
 let recipeDetail = document.querySelector("li")
 let infoCard = document.querySelector("#infoCard")
 let calorieCard = document.querySelector("#calorieCard")
+let totalCal = 0;
+let burnCal = 0;
 console.log(recipeList)
 
 const nutritionAPI = {
@@ -44,26 +46,24 @@ function getApi(event) {
       });
   }
 }
-//----------------------------------- Protien optoins above--------------
+//----------------------------------- Protein options above--------------
 
 //------------------------------------Calories info below -----------------
 function displayDetail(event) {
   if (event.target.matches("li")) {
-    let labelEl = document.createElement("h3")
+    let labelEl = document.createElement("h4")
     labelEl.innerHTML = `<a href=${event.target.dataset.url}>${event.target.textContent}</a>`
     infoCard.appendChild(labelEl)
 
     let calorieEl = document.createElement("p")
     calorieEl.textContent = ("Calories: " + event.target.dataset.cal)
     infoCard.appendChild(calorieEl)
-
- 
-    let calorieBurn = document.createElement("h3")
-    calorieBurn.textContent = ("Total calories consumed: " + event.target.dataset.cal)
+    totalCal += parseInt(event.target.dataset.cal)
+    let calorieBurn = document.createElement("h4")
+    calorieBurn.textContent = ("Total calories consumed: " +totalCal)
     calorieCard.appendChild(calorieBurn)
   }
 }
-
 
 function getFitnessAPI(event) {
   if (event.target.matches("li")) {
@@ -75,17 +75,22 @@ function getFitnessAPI(event) {
         .then(function (data) {
         let workout = data[4]
         let calorieBurned = document.createElement("h4")
-        calorieBurned.textContent = ("Burning Calories: " + workout.total_calories)
+        calorieBurned.textContent = ("Calories Burned from 1hr of Walking : " + workout.total_calories)
+        burnCal += workout.total_calories
         calorieCard.appendChild(calorieBurned)
-        console.log(workout)
-  })
+        console.log(workout)})
+        .then(function () {
+        
+          let netCal = totalCal - burnCal;
+          let netCalEl = document.createElement("h4")
+          netCalEl.textContent = ("Net Caloric Intake: " + netCal)
+          calorieCard.appendChild(netCalEl)
+          console.log(netCal)
+        })
+  }
 }
-}
-
-
 
 //-------------------------------Calories info above ---------------------------
-
 
 proteinContainer.addEventListener('click', getApi)
 
@@ -108,8 +113,6 @@ function showPrevChoice() {
     document.querySelector(".show-prev-choice").textContent = lastSelect
   }
 }
-
-
 
 //----------------------API below --------------------------------
 fetch(
