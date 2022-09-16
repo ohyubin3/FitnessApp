@@ -57,21 +57,7 @@ function displayDetail(event) {
     calorieEl.textContent = ("Calories: " + event.target.dataset.cal)
     infoCard.appendChild(calorieEl)
 
-    // let requestUrl = "https://calories-burned-by-api-ninjas.p.rapidapi.com/v1/caloriesburned?activity=race-walking";
-    // fetch(requestUrl, fitnessOptions)
-    // .then(function (response){
-    // return response.json()
-    // })
-    // .then(function(data){
-    // let workout = data.name
-    // let cardFour = document.createElement("h3")
-    // cardFour.dataset = workout;
-    // })
-    // console.log(requestUrl)
-    // console.log(workout)
-
-
-
+ 
     let calorieBurn = document.createElement("h3")
     calorieBurn.textContent = ("Total calories consumed: " + event.target.dataset.cal)
     calorieCard.appendChild(calorieBurn)
