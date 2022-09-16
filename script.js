@@ -46,7 +46,11 @@ function getApi(event) {
       });
   }
 }
+
 //----------------------------------- Protein options above--------------
+
+//----------------------------------- Protien optoins above--------------
+
 
 //------------------------------------Calories info below -----------------
 function displayDetail(event) {
@@ -58,12 +62,23 @@ function displayDetail(event) {
     let calorieEl = document.createElement("p")
     calorieEl.textContent = ("Calories: " + event.target.dataset.cal)
     infoCard.appendChild(calorieEl)
+
     totalCal += parseInt(event.target.dataset.cal)
     let calorieBurn = document.createElement("h4")
     calorieBurn.textContent = ("Total calories consumed: " +totalCal)
+
+
+ 
+    let calorieBurn = document.createElement("h3")
+    calorieBurn.textContent = ("Total calories consumed: " + event.target.dataset.cal)
+
     calorieCard.appendChild(calorieBurn)
   }
 }
+
+
+
+
 
 function getFitnessAPI(event) {
   if (event.target.matches("li")) {
@@ -75,6 +90,7 @@ function getFitnessAPI(event) {
         .then(function (data) {
         let workout = data[4]
         let calorieBurned = document.createElement("h4")
+
         calorieBurned.textContent = ("Calories Burned from 1hr of Walking: " + workout.total_calories)
         burnCal += workout.total_calories
         calorieCard.appendChild(calorieBurned)
@@ -87,6 +103,14 @@ function getFitnessAPI(event) {
           console.log(netCal)
         })
   }
+}
+
+
+        calorieBurned.textContent = ("Burning Calories: " + workout.total_calories)
+        calorieCard.appendChild(calorieBurned)
+        console.log(workout)
+  })
+}
 }
 
 
@@ -133,4 +157,8 @@ fetch(
 )
   .then((response) => response.json())
   .then((response) => console.log(response))
+
   .catch((err) => console.error(err));
+
+  .catch((err) => console.error(err));
+
