@@ -82,6 +82,8 @@ function getFitnessAPI(event) {
 }
 }
 
+
+
 //-------------------------------Calories info above ---------------------------
 
 
@@ -89,6 +91,25 @@ proteinContainer.addEventListener('click', getApi)
 
 recipeList.addEventListener('click', displayDetail)
 recipeList.addEventListener('click', getFitnessAPI)
+showPrevChoice();
+
+// localstorage system //
+
+recipeList.addEventListener('click', function (event) {
+  if (event.target.matches("li")) {
+
+    let prevChoice = event.target.textContent
+    localStorage.setItem("savePrevChoice", JSON.stringify(prevChoice));
+}});
+
+function showPrevChoice() {
+  let lastSelect = JSON.parse(localStorage.getItem("savePrevChoice"));
+  if (lastSelect !== null) {
+    document.querySelector(".show-prev-choice").textContent = lastSelect
+  }
+}
+
+
 
 //----------------------API below --------------------------------
 fetch(
