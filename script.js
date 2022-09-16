@@ -13,6 +13,13 @@ const nutritionAPI = {
     "X-RapidAPI-Host": "edamam-recipe-search.p.rapidapi.com",
   },
 };
+const fitnessOptions = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": "5ef0a389f2msh11866c287896cb0p101bc7jsn1c10fa4b94f1",
+    "X-RapidAPI-Host": "calories-burned-by-api-ninjas.p.rapidapi.com",
+  },
+};
 
 // --------------Protein options and selections and calories below-------------
 let protein;
@@ -32,7 +39,11 @@ function getApi(event) {
           listItem.dataset.cal = Math.floor(parseInt(recipes[i].recipe.calories))
           listItem.innerHTML = `${recipes[i].recipe.label}`
           recipeList.appendChild(listItem);
-          listItem.dataset.url = recipes[i].recipe.url}});}}
+          listItem.dataset.url = recipes[i].recipe.url
+        }
+      });
+  }
+}
 //----------------------------------- Protien optoins above--------------
 
 //------------------------------------Calories info below -----------------
@@ -44,11 +55,54 @@ function displayDetail(event) {
 
     let calorieEl = document.createElement("p")
     calorieEl.textContent = ("Calories: " + event.target.dataset.cal)
-    infoCard.appendChild(calorieEl)}}
+    infoCard.appendChild(calorieEl)
+
+    // let requestUrl = "https://calories-burned-by-api-ninjas.p.rapidapi.com/v1/caloriesburned?activity=race-walking";
+    // fetch(requestUrl, fitnessOptions)
+    // .then(function (response){
+    // return response.json()
+    // })
+    // .then(function(data){
+    // let workout = data.name
+    // let cardFour = document.createElement("h3")
+    // cardFour.dataset = workout;
+    // })
+    // console.log(requestUrl)
+    // console.log(workout)
+
+
+
+    let calorieBurn = document.createElement("h3")
+    calorieBurn.textContent = ("Total calories consumed: " + event.target.dataset.cal)
+    calorieCard.appendChild(calorieBurn)
+  }
+}
+
+
+function getFitnessAPI(event) {
+  if (event.target.matches("li")) {
+    let requestUrl = "https://calories-burned-by-api-ninjas.p.rapidapi.com/v1/caloriesburned?activity=walking";
+    fetch(requestUrl, fitnessOptions)
+      .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+        let workout = data[4]
+        let calorieBurned = document.createElement("h4")
+        calorieBurned.textContent = ("Burning Calories: " + workout.total_calories)
+        calorieCard.appendChild(calorieBurned)
+        console.log(workout)
+  })
+}
+}
+
+//-------------------------------Calories info above ---------------------------
+
 
 proteinContainer.addEventListener('click', getApi)
 
 recipeList.addEventListener('click', displayDetail)
+recipeList.addEventListener('click', getFitnessAPI)
 
 //----------------------API below --------------------------------
 fetch(
@@ -58,18 +112,10 @@ fetch(
   .then((response) => response.json())
   .then((response) => console.log(response))
   .catch((err) => console.error(err));
-const fitnessOptions = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Key": "5ef0a389f2msh11866c287896cb0p101bc7jsn1c10fa4b94f1",
-    "X-RapidAPI-Host": "calories-burned-by-api-ninjas.p.rapidapi.com",
-  },
-};
 fetch(
-  "https://calories-burned-by-api-ninjas.p.rapidapi.com/v1/caloriesburned?activity=skiing",
+  "https://calories-burned-by-api-ninjas.p.rapidapi.com/v1/caloriesburned?activity=walking",
   fitnessOptions
 )
   .then((response) => response.json())
   .then((response) => console.log(response))
   .catch((err) => console.error(err));
-//------------------------API above --------------------------------------
