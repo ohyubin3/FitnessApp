@@ -3,7 +3,7 @@ var recipeList = document.querySelector('ul');
 let proteinContainer = document.querySelector(".dropdown-menu")
 let recipeDetail = document.querySelector("li")
 let infoCard = document.querySelector("#infoCard")
-
+let calorieCard = document.querySelector("#calorieCard")
 console.log(recipeList)
 
 const nutritionAPI = {
@@ -14,7 +14,7 @@ const nutritionAPI = {
   },
 };
 
-
+// --------------Protein options and selections and calories below-------------
 let protein;
 function getApi(event) {
   if (event.target.matches("a")) {
@@ -24,55 +24,35 @@ function getApi(event) {
       .then(function (response) {
         return response.json();
       })
+
       .then(function (data) {
-        // console.log(data)
-        // console.log("hello")
-        // console.log(typeof data)
         let recipes = data.hits
-
         for (var i = 0; i < recipes.length; i++) {
-          // console.log("hello", i)
           var listItem = document.createElement('li');
-          // console.log(listItem)
-
-          // path for looping over lables
-          // console.log(recipes[i].recipe.label)
-  // consider doing innerhtml if you want links 
           listItem.dataset.cal = Math.floor(parseInt(recipes[i].recipe.calories))
-
           listItem.innerHTML = `${recipes[i].recipe.label}`
-          // console.log(listItem)
-
           recipeList.appendChild(listItem);
-          listItem.dataset.url = recipes[i].recipe.url
-          
+          listItem.dataset.url = recipes[i].recipe.url}});}}
+//----------------------------------- Protien optoins above--------------
 
-          // listItem.dataset.url = recipes[i].recipe.url);
-          // listItem.innerHTML = `${recipes[i].recipe.label}`
-          // recipeList.appendChild(listItem);
-          //  console.log(recipeList)
-        }
-      });
-  }
-}
-// changes
+//------------------------------------Calories info below -----------------
 function displayDetail(event) {
   if (event.target.matches("li")) {
-    // console.log(event.target.textContent)
-    // console.log(event.target.dataset.cal)
     let labelEl = document.createElement("h3")
     labelEl.innerHTML = `<a href=${event.target.dataset.url}>${event.target.textContent}</a>`
     infoCard.appendChild(labelEl)
 
     let calorieEl = document.createElement("p")
     calorieEl.textContent = ("Calories: " + event.target.dataset.cal)
-    infoCard.appendChild(calorieEl)
-  }
-}
+    infoCard.appendChild(calorieEl)}}
+
+    var requestUrl
+
 proteinContainer.addEventListener('click', getApi)
 
 recipeList.addEventListener('click', displayDetail)
 
+//----------------------API below --------------------------------
 fetch(
   `https://edamam-recipe-search.p.rapidapi.com/search?q=${protein}`,
   nutritionAPI
@@ -97,3 +77,5 @@ fetch(
   .then((response) => response.json())
   .then((response) => console.log(response))
   .catch((err) => console.error(err));
+
+//------------------------API above --------------------------------------
